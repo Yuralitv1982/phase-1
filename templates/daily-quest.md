@@ -1,74 +1,62 @@
 
 <%*
-// 1. Находим файл
+// --- 1. ПАРСИНГ CYCLE.MD (Templater) ---
 const file = tp.file.find_tfile("cycle.md");
+let result = "";
+
 if (!file) {
-    tR += "⚠️ ОШИБКА: Файл cycle.md не найден.";
+    result = "⚠️ ОШИБКА: Файл cycle.md не найден.";
 } else {
-    // 2. Читаем и готовим данные
     const content = await app.vault.read(file);
     const lines = content.split(/\r?\n/);
-    
-    // Определяем день недели (Вторник = 2 -> ищем "D02")
     const isoDay = moment().isoWeekday();
     const tag = `D0${isoDay}`;
 
-    // 3. Ищем колонку дня
     const headerLine = lines.find(l => l.includes("|") && l.includes(tag));
     
     if (!headerLine) {
-        tR += `⚠️ ОШИБКА: Не найдена колонка ${tag} в таблице.`;
+        result = `### 💤 Сегодня задач по графику ${tag} не найдено.`;
     } else {
         const headers = headerLine.split("|").map(h => h.trim());
         const colIdx = headers.indexOf(tag);
+        let tasks = "";
 
-        let result = "";
-
-        // 4. Парсим строки
         for (const line of lines) {
             const cleanLine = line.trim();
-            // Пропускаем мусор: разделители, заголовок, строку TOTAL
             if (!cleanLine.startsWith("|") || cleanLine.startsWith("+")) continue;
             if (cleanLine.includes("TOTAL") || cleanLine === headerLine.trim()) continue;
 
             const parts = cleanLine.split("|").map(p => p.trim());
-            
-            // Если строка короче нужной колонки - пропускаем
             if (parts.length <= colIdx) continue;
 
-            // Берем часы из колонки D02
             const hours = parseFloat(parts[colIdx]);
-            
-            // Если часов нет или 0 - пропускаем дисциплину
-            if (!hours) continue;
+            if (!hours || isNaN(hours)) continue;
 
-            // Имя дисциплины (обычно индекс 1: ["", "1. ENG", "1", ...])
             const rawName = parts[1] || "Task";
-            const name = rawName.replace(/^\d+\.\s*/, ""); // Убираем номер "1. "
-            // Делаем slug для ссылок
+            const name = rawName.replace(/^\d+\.\s*/, ""); 
             const slug = name.toLowerCase().replace(/[^a-z0-9а-яё]+/g, "-").replace(/^-|-$/g, "");
 
-            // Считаем минуты (25% теория, 75% практика)
             const totalMin = hours * 60;
             const th = Math.floor(totalMin * 0.25);
             const pr = totalMin - th;
 
-            // 5. Генерируем блок (БЕЗ ТАЙМЕРОВ)
-            result += `### ⚔️ [[${slug}-moc|${name}]] (${hours}ч)\n`;
-            result += `- [ ] **теория** (${th}м)\n`;
-            result += `- [ ] **drill** (${pr}м)\n`;
-            result += `- [ ] **комплексные задачи** (${pr}м)\n`;
+            tasks += `### ⚔️ [[${slug}-moc|${name}]] (${hours}ч)\n`;
+            tasks += `${name.toLowerCase().replace(/\s+/g, "-")}-theory:: 0\n`;
+            tasks += `${name.toLowerCase().replace(/\s+/g, "-")}-practice:: 0\n`;
+            tasks += `- [ ] **теория** (${th}м)\n`;
+            tasks += `- [ ] **практика** (${pr}м)\n\n`;
         }
-
-        if (!result) result = "### 💤 Сегодня по графику отдых.";
-        
-        // Выводим результат
-        tR += result;
+        result = tasks || "### 💤 Сегодня отдых.";
     }
 }
+tR += result;
 %>
 
+# 🕹 daily quest | <% tp.date.now("DD.MM.YYYY") %>
 
+## 🌍 глобальный таймер смены
+```simple-time-tracker
+{ "id": "global-shift", "name": "глобальный таймер" }
 # 🕹 daily quest | <% tp.date.now("DD.MM.YYYY") %>
 
 ## 🌍 глобальный таймер смены
@@ -79,50 +67,84 @@ if (!file) {
 
 
 ## 📈 Метрики смены
-global-duration:: 0
-obsidion-theory:: 0
-obsidion-practice:: 0
-hc-theory:: 0
-hc-practice:: 0
-effective-time:: 0
-waste-time:: 0
 
+```dataviewjs
+// 1. Берем данные текущего файла
+const p = dv.current();
+
+// 2. Фильтруем все поля, которые мы создали для задач
+const entries = Object.entries(p);
+const theory = entries.filter(([k]) => k.endsWith("-theory")).reduce((s, [k, v]) => s + (Number(v) || 0), 0);
+const practice = entries.filter(([k]) => k.endsWith("-practice")).reduce((s, [k, v]) => s + (Number(v) || 0), 0);
+
+// 3. Итоговые цифры
+const effective = theory + practice;
+const global = p["global-duration"] || 0;
+const waste = Math.max(0, global - effective);
+const efficiency = global > 0 ? ((effective / global) * 100).toFixed(1) : 0;
+
+// 4. Вывод списком (как ты любишь, без таблиц)
+dv.list([
+    `🔹 **Общая смена (Global):** ${global} мин`,
+    `🔹 **Чистая работа (Effective):** ${effective} мин (Теория: ${theory} | Практика: ${practice})`,
+    `🔹 **Потери (Waste):** ${waste} мин`,
+    `🚀 **КПД:** ${efficiency}%`
+]);
+```
 ## 🐲 BOSS: BACKLOG (Приоритет 100%)
 > Не закрыл вчера — умри сегодня.
 
-```dataview
-task
-where !completed 
-where file.name < this.file.name
-sort file.name asc
+```dataviewjs
+// Блок BOSS: TIME LAG (v0.1.3-stable)
+let pages = dv.pages('"dayly"').where(p => p.file.day && p.file.day < dv.date('today'));
+let totalDebtMin = 0;
+
+for (let p of pages) {
+    let plannedMin = (p["planned-total-hours"] || 0) * 60;
+    // Считаем все поля, заканчивающиеся на -theory и -practice
+    let fields = Object.keys(p).filter(k => k.endsWith("-theory") || k.endsWith("-practice"));
+    let effectiveMin = fields.reduce((sum, k) => sum + (Number(p[k]) || 0), 0);
+    
+    let diff = plannedMin - effectiveMin;
+    if (diff > 0) totalDebtMin += diff;
+}
+
+if (totalDebtMin > 0) {
+    let hours = Math.floor(totalDebtMin / 60);
+    let mins = totalDebtMin % 60;
+    let daysDelayed = (totalDebtMin / 480).toFixed(1); // 480 мин = 8ч рабочий день
+
+    dv.header(2, "🐲 BOSS: TIME LAG");
+    dv.paragraph(`🔴 **Суммарный недокол:** ${hours}ч ${mins}м`);
+    dv.paragraph(`⚠️ **Сдвиг дедлайна:** Твой оффер Architect отодвинулся на **${daysDelayed} дня(ей)**.`);
+} else {
+    dv.paragraph("✅ **Core optimized:** Долгов нет. Система в идеальном состоянии.");
+}
 ```
 
 
 
-## ⚖️ Вердикт системы (Live) 
+
 ```dataviewjs
-// 1. Получаем данные из текущего файла
 const current = dv.current();
-const actual = current["effective-time"] || 0;
+// Считаем эффективное время прямо здесь для точности
+const fields = Object.keys(current).filter(k => k.endsWith("-theory") || k.endsWith("-practice"));
+const actual = fields.reduce((sum, k) => sum + (Number(current[k]) || 0), 0);
 
-// 2. Ищем план в этом же файле (мы его туда записывали при генерации)
-// Если в файле нет поля 'planned-time', можно вытащить его из метаданных или оставить заглушку
-const plannedHours = current["planned-total-hours"] || 10; // пример для субботы
+const plannedHours = current["planned-total-hours"] || 10; 
 const plannedMin = plannedHours * 60;
-
 const delta = plannedMin - actual;
 
 dv.header(2, "⚖️ Вердикт системы");
 
 if (delta <= 0) {
-    dv.paragraph("✅ **План выполнен.** Ты отработал норму. Долгов нет. Красава, Архитектор.");
+    dv.paragraph("✅ **План выполнен.** Красава, Архитектор.");
 } else {
-    const hours = Math.floor(delta / 60);
-    const mins = delta % 60;
-    
-    dv.paragraph(`🔴 **ОБНАРУЖЕН НЕДОКОЛ:** Ты задолжал системе **${hours}ч ${mins}м**.`);
-    dv.paragraph(`> [ ] 💸 **ДОЛГ:** Отработать ${hours}ч ${mins}м за ${current.file.name} #debt`);
-    
-    dv.paragraph("---");
-    dv.paragraph("Этот долг теперь будет преследовать тебя в секции BOSS: BACKLOG, пока ты не поставишь галочку.");
+    const h = Math.floor(delta / 60);
+    const m = delta % 60;
+    dv.paragraph(`🔴 **НЕДОКОЛ:** Ты задолжал **${h}ч ${m}м**.`);
+    dv.paragraph(`> [ ] 💸 **ДОЛГ:** Отработать за ${current.file.name} #debt`);
 }
+
+```
+

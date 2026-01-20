@@ -1,3 +1,40 @@
+
+## 🔥 Карта активности (Heatmap) 
+```dataviewjs
+const calendarData = {
+    year: 2026, // Текущий год
+    colors: {    // Цветовая схема (зеленая, как на GitHub)
+        green: ["#e7f1e7", "#c2e5c2", "#85d285", "#46bc46", "#2d812d"],
+    },
+    entries: []
+}
+
+// 1. Собираем данные из папки dayly
+for (let page of dv.pages('"dayly"').where(p => p["effective-time"])) {
+    // Преобразуем минуты в интенсивность (0-5)
+    // Например: <60м = 1, <180м = 2, <300м = 3, <480м = 4, >480м = 5
+    let time = page["effective-time"];
+    let intensity = 0;
+    
+    if (time > 0 && time < 60) intensity = 1;
+    else if (time >= 60 && time < 180) intensity = 2;
+    else if (time >= 180 && time < 300) intensity = 3;
+    else if (time >= 300 && time < 480) intensity = 4;
+    else if (time >= 480) intensity = 5;
+
+    calendarData.entries.push({
+        date: page.file.name, // Файл должен называться YYYY-MM-DD
+        intensity: intensity,
+        content: await dv.span(`**${time}м** работы`), // Подсказка при наведении
+    })
+}
+
+renderHeatmapCalendar(this.container, calendarData)
+```
+
+
+
+
 ```tracker
 searchType: dvField
 searchTarget: effective-duration, waste-time

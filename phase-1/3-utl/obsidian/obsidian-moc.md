@@ -16,8 +16,8 @@ SORT module_id ASC
 ```
 
 ## 🏗 Технологическая цепочка
-0. [[obsidian-m0.md]] — Keyboard Ninja (База)
-1. [[obsidian-m1.md]] — Фундамент и среда (Fedora/PARA)
+0. [[obsidian-m0]] — Keyboard Ninja (База)
+1. [[obsidian-m1]] — Фундамент и среда (Fedora/PARA)
 2. [[obsidian_M2.md]] — Связи и структура (MOC/Graph)
 3. [[obsidian_M3.md]] — Интеграция с Git (Commit/Log)
 4. [[obsidian_M4.md]] — Observability (Dataview/Metrics)

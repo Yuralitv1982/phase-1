@@ -1,6 +1,6 @@
 
 <%*
-// --- 1. ПАРСИНГ CYCLE.MD (Templater) ---
+// --- 1. ПАРСИНГ CYCLE.MD С АВТО-ТАЙМЕРАМИ ---
 const file = tp.file.find_tfile("cycle.md");
 let result = "";
 
@@ -40,11 +40,21 @@ if (!file) {
             const th = Math.floor(totalMin * 0.25);
             const pr = totalMin - th;
 
+            // Генерируем блок дисциплины с инлайновыми полями и таймерами
             tasks += `### ⚔️ [[${slug}-moc|${name}]] (${hours}ч)\n`;
-            tasks += `${name.toLowerCase().replace(/\s+/g, "-")}-theory:: 0\n`;
-            tasks += `${name.toLowerCase().replace(/\s+/g, "-")}-practice:: 0\n`;
-            tasks += `- [ ] **теория** (${th}м)\n`;
-            tasks += `- [ ] **практика** (${pr}м)\n\n`;
+            tasks += `${slug}-theory:: 0\n`;
+            tasks += `${slug}-practice:: 0\n\n`;
+            
+            tasks += `#### 📚 Теория (${th}м)\n`;
+            tasks += "```simple-time-tracker\n";
+            tasks += `{ "id": "${slug}-th-${tp.date.now("YYYYMMDD")}", "name": "${name} Theory" }\n`;
+            tasks += "```\n";
+            
+            tasks += `#### 🛠 Практика (${pr}м)\n`;
+            tasks += "```simple-time-tracker\n";
+            tasks += `{ "id": "${slug}-pr-${tp.date.now("YYYYMMDD")}", "name": "${name} Practice" }\n`;
+            tasks += "```\n\n";
+            tasks += `---\n\n`;
         }
         result = tasks || "### 💤 Сегодня отдых.";
     }

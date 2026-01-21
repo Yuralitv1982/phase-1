@@ -16,6 +16,7 @@ status: 🟡 active
 - [ ] **linux** — среда обитания (fedora) | [[linux-moc]]
 - [ ] **bash** — автоматизация рутины | [[bash-moc]]
 - [ ] **webstorm** — главный сборочный цех | [[webstorm-moc]]
+- [ ] helix - малая мастерская [[hx-moc]]
 
 ---
 
@@ -24,3 +25,4 @@ status: 🟡 active
 table status as "статус", completed_modules + "/" + total_modules as "прогресс"
 from "utl"
 where type = "moc" and file.name != "utl-moc"
+```

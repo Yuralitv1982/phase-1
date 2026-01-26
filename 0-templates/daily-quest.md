@@ -46,14 +46,14 @@ if (!file) {
             tasks += `${slug}-practice:: 0\n\n`;
             
             tasks += `#### 📚 Теория (${th}м)\n`;
-            tasks += "```simple-time-tracker\n";
-            tasks += `{ "id": "${slug}-th-${tp.date.now("YYYYMMDD")}", "name": "${name} Theory" }\n`;
-            tasks += "```\n";
+            //tasks += "```simple-time-tracker\n"; 
+            //tasks += `{ "id": "${slug}-th-${tp.date.now("YYYYMMDD")}", "name": "${name} Theory" }\n`;
+            //tasks += "```\n";
             
             tasks += `#### 🛠 Практика (${pr}м)\n`;
-            tasks += "```simple-time-tracker\n";
-            tasks += `{ "id": "${slug}-pr-${tp.date.now("YYYYMMDD")}", "name": "${name} Practice" }\n`;
-            tasks += "```\n\n";
+            // tasks += "```simple-time-tracker\n";
+            //tasks += `{ "id": "${slug}-pr-${tp.date.now("YYYYMMDD")}", "name": "${name} Practice" }\n`;
+            //tasks += "```\n\n";
             tasks += `---\n\n`;
         }
         result = tasks || "### 💤 Сегодня отдых.";
@@ -76,85 +76,46 @@ tR += result;
 ```
 
 
-## 📈 Метрики смены
-
 ```dataviewjs
-// 1. Берем данные текущего файла
+// 1. Читаем время из ЕДИНСТВЕННОГО глобального таймера
+const content = await dv.io.load(dv.current().file.path);
+const timerMatch = content.match(/```simple-time-tracker\s*([\s\S]*?)\s*```/);
+let globalMin = 0;
+
+if (timerMatch) {
+    try {
+        const data = JSON.parse(timerMatch[1]);
+        let ms = 0;
+        if (data.entries) {
+            data.entries.forEach(e => {
+                if (e.startTime && e.endTime) ms += (new Date(e.endTime) - new Date(e.startTime));
+            });
+        }
+        globalMin = Math.floor(ms / 1000 / 60);
+    } catch (e) {}
+}
+
+// 2. Читаем РУЧНЫЕ данные из полей заметки
 const p = dv.current();
+const fields = Object.entries(p);
+// Суммируем всё, что ты ввел в поля вида 'название-theory' или 'название-practice'
+const effectiveMin = fields
+    .filter(([k]) => k.endsWith("-theory") || k.endsWith("-practice"))
+    .reduce((s, [k, v]) => s + (Number(v) || 0), 0);
 
-// 2. Фильтруем все поля, которые мы создали для задач
-const entries = Object.entries(p);
-const theory = entries.filter(([k]) => k.endsWith("-theory")).reduce((s, [k, v]) => s + (Number(v) || 0), 0);
-const practice = entries.filter(([k]) => k.endsWith("-practice")).reduce((s, [k, v]) => s + (Number(v) || 0), 0);
+// 3. Константы и расчеты
+const isoDay = moment().isoWeekday(); 
+const ruleMin = (isoDay >= 6) ? 600 : 300; 
+const waste = Math.max(0, globalMin - effectiveMin);
+const efficiency = globalMin > 0 ? ((effectiveMin / globalMin) * 100).toFixed(1) : 0;
 
-// 3. Итоговые цифры
-const effective = theory + practice;
-const global = p["global-duration"] || 0;
-const waste = Math.max(0, global - effective);
-const efficiency = global > 0 ? ((effective / global) * 100).toFixed(1) : 0;
-
-// 4. Вывод списком (как ты любишь, без таблиц)
+// 4. Твой список
+dv.header(3, "📊 Анализ потока");
 dv.list([
-    `🔹 **Общая смена (Global):** ${global} мин`,
-    `🔹 **Чистая работа (Effective):** ${effective} мин (Теория: ${theory} | Практика: ${practice})`,
-    `🔹 **Потери (Waste):** ${waste} мин`,
-    `🚀 **КПД:** ${efficiency}%`
+    `🕰 **Wall Clock:** \`${globalMin}\` мин (из таймера)`,
+    `🚀 **Чистая работа:** \`${effectiveMin}\` мин (твои ручные данные)`,
+    `🔴 **Потери (Waste):** \`${waste}\` мин`,
+    `📈 **КПД:** \`${efficiency}%\``
 ]);
-```
-## 🐲 BOSS: BACKLOG (Приоритет 100%)
-> Не закрыл вчера — умри сегодня.
-
-```dataviewjs
-// Блок BOSS: TIME LAG (v0.1.3-stable)
-let pages = dv.pages('"dayly"').where(p => p.file.day && p.file.day < dv.date('today'));
-let totalDebtMin = 0;
-
-for (let p of pages) {
-    let plannedMin = (p["planned-total-hours"] || 0) * 60;
-    // Считаем все поля, заканчивающиеся на -theory и -practice
-    let fields = Object.keys(p).filter(k => k.endsWith("-theory") || k.endsWith("-practice"));
-    let effectiveMin = fields.reduce((sum, k) => sum + (Number(p[k]) || 0), 0);
-    
-    let diff = plannedMin - effectiveMin;
-    if (diff > 0) totalDebtMin += diff;
-}
-
-if (totalDebtMin > 0) {
-    let hours = Math.floor(totalDebtMin / 60);
-    let mins = totalDebtMin % 60;
-    let daysDelayed = (totalDebtMin / 480).toFixed(1); // 480 мин = 8ч рабочий день
-
-    dv.header(2, "🐲 BOSS: TIME LAG");
-    dv.paragraph(`🔴 **Суммарный недокол:** ${hours}ч ${mins}м`);
-    dv.paragraph(`⚠️ **Сдвиг дедлайна:** Твой оффер Architect отодвинулся на **${daysDelayed} дня(ей)**.`);
-} else {
-    dv.paragraph("✅ **Core optimized:** Долгов нет. Система в идеальном состоянии.");
-}
-```
-
-
-
-
-```dataviewjs
-const current = dv.current();
-// Считаем эффективное время прямо здесь для точности
-const fields = Object.keys(current).filter(k => k.endsWith("-theory") || k.endsWith("-practice"));
-const actual = fields.reduce((sum, k) => sum + (Number(current[k]) || 0), 0);
-
-const plannedHours = current["planned-total-hours"] || 10; 
-const plannedMin = plannedHours * 60;
-const delta = plannedMin - actual;
-
-dv.header(2, "⚖️ Вердикт системы");
-
-if (delta <= 0) {
-    dv.paragraph("✅ **План выполнен.** Красава, Архитектор.");
-} else {
-    const h = Math.floor(delta / 60);
-    const m = delta % 60;
-    dv.paragraph(`🔴 **НЕДОКОЛ:** Ты задолжал **${h}ч ${m}м**.`);
-    dv.paragraph(`> [ ] 💸 **ДОЛГ:** Отработать за ${current.file.name} #debt`);
-}
-
 ```
 

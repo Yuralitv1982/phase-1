@@ -13,7 +13,7 @@ TABLE
     status as "Статус", 
     duration as "Затрачено (мин)", 
     length(filter(file.tasks, (t) => !t.completed)) as "Задач осталось"
-FROM "js"
+FROM "phase-1/2-js"
 WHERE type = "module"
 SORT file.name ASC
 ```
@@ -30,7 +30,7 @@ SORT file.name ASC
 ```dataviewjs
 // Карта захвата JavaScript (v0.1.3)
 // Фильтр: папка "js", файлы с "-m", исключая "moc"
-let modules = dv.pages('"js"')
+let modules = dv.pages('"phase-1/2-js"')
     .where(p => p.file.name.includes("-m") && !p.file.name.includes("moc"))
     .sort(p => p.file.name, 'asc');
 

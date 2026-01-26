@@ -3,7 +3,7 @@ type: module
 module_id: m0
 discipline: js
 status: 🔴 Todo
-duration: 120
+duration: 0
 ---
 
 # Введение и Основы

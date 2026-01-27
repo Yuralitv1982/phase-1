@@ -1,19 +1,23 @@
 ---
-discipline: log
+discipline: dc
 type: MOC
 status: 🟡 В производстве
 pillars: 7_pillars_enabled
 ---
 
-# 🗺 Карта дисциплины: js
-
+# 🗺 Карта дисциплины: tnk
+три книги 
+	pragmatic
+	code-complete
+	become a better programmer
+	мышление архитектора
 ## 📊 Состояние производства (Анализ и Аудит)
 ```dataview
 TABLE 
     status as "Статус", 
     duration as "Затрачено (мин)", 
     length(filter(file.tasks, (t) => !t.completed)) as "Задач осталось"
-FROM "phase-1/4-log"
+FROM "phase-1/dc"
 WHERE type = "module"
 SORT file.name ASC
 ```
@@ -30,7 +34,7 @@ SORT file.name ASC
 ```dataviewjs
 // Карта захвата JavaScript (v0.1.3)
 // Фильтр: папка "dc", файлы с "-m", исключая "moc"
-let modules = dv.pages('"phase-1/4-log"')
+let modules = dv.pages('"phase-1/dc"')
     .where(p => p.file.name.includes("-m") && !p.file.name.includes("moc"))
     .sort(p => p.file.name, 'asc');
 

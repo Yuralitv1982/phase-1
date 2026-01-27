@@ -1,45 +1,28 @@
 {
-  "editor:toggle-bold": [
+  "daily-notes": [
     {
       "modifiers": [
-        "Mod",
-        "Shift"
+        "Alt"
       ],
-      "key": "B"
-    }
-  ],
-  "app:toggle-right-sidebar": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "B"
+      "key": "D"
     }
   ],
   "app:toggle-left-sidebar": [
     {
       "modifiers": [
-        "Alt",
-        "Mod"
+        "Mod",
+        "Shift"
       ],
-      "key": "B"
+      "key": "L"
     }
   ],
-  "switcher:open": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "P"
-    }
-  ],
-  "command-palette:open": [
+  "app:toggle-right-sidebar": [
     {
       "modifiers": [
         "Mod",
         "Shift"
       ],
-      "key": "P"
+      "key": "R"
     }
   ],
   "file-explorer:open": [
@@ -51,62 +34,31 @@
       "key": "E"
     }
   ],
-  "daily-notes": [
-    {
-      "modifiers": [
-        "Alt"
-      ],
-      "key": "D"
-    }
-  ],
-  "editor:toggle-checklist-status": [
+  "workspace:split-vertical": [
     {
       "modifiers": [
         "Mod",
         "Shift"
       ],
-      "key": "Enter"
+      "key": "S"
     }
   ],
-  "insert-template": [
-    {
-      "modifiers": [
-        "Alt"
-      ],
-      "key": "T"
-    }
-  ],
-  "editor:swap-line-up": [
-    {
-      "modifiers": [
-        "Alt"
-      ],
-      "key": "ArrowUp"
-    }
-  ],
-  "editor:swap-line-down": [
-    {
-      "modifiers": [
-        "Alt"
-      ],
-      "key": "ArrowDown"
-    }
-  ],
-  "editor:delete-paragraph": [
+  "editor:set-heading-1": [
     {
       "modifiers": [
         "Mod",
         "Shift"
       ],
-      "key": "K"
+      "key": "1"
     }
   ],
-  "editor:add-cursor-above": [
+  "editor:set-heading-2": [
     {
       "modifiers": [
-        "Mod"
+        "Mod",
+        "Shift"
       ],
-      "key": "D"
+      "key": "2"
     }
   ],
   "editor:set-heading-3": [
@@ -145,34 +97,16 @@
       "key": "6"
     }
   ],
-  "bookmarks:bookmark-current-heading": [
+  "editor:set-heading": [
     {
       "modifiers": [
         "Mod",
         "Shift"
       ],
-      "key": "M"
+      "key": "H"
     }
   ],
-  "editor:set-heading-1": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "1"
-    }
-  ],
-  "editor:set-heading-2": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "2"
-    }
-  ],
-  "editor:fold-all": [
+  "editor:fold-less": [
     {
       "modifiers": [
         "Mod",
@@ -181,7 +115,7 @@
       "key": "["
     }
   ],
-  "editor:unfold-all": [
+  "editor:fold-more": [
     {
       "modifiers": [
         "Mod",
@@ -196,7 +130,50 @@
         "Mod",
         "Shift"
       ],
-      "key": "'"
+      "key": "="
+    }
+  ],
+  "editor:insert-codeblock": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "K"
+    }
+  ],
+  "editor:toggle-highlight": [
+    {
+      "modifiers": [
+        "Alt",
+        "Mod"
+      ],
+      "key": "H"
+    }
+  ],
+  "file-explorer:new-folder": [
+    {
+      "modifiers": [
+        "Alt",
+        "Mod"
+      ],
+      "key": "F"
+    }
+  ],
+  "editor:focus-left": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "["
+    }
+  ],
+  "editor:focus-right": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "]"
     }
   ]
 }

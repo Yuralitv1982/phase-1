@@ -1,11 +1,11 @@
 ---
-discipline: hc
+discipline: log
 type: MOC
 status: 🟡 В производстве
 pillars: 7_pillars_enabled
 ---
 
-# 🗺 Карта дисциплины: hc
+# 🗺 Карта дисциплины: js
 
 ## 📊 Состояние производства (Анализ и Аудит)
 ```dataview
@@ -13,22 +13,24 @@ TABLE
     status as "Статус", 
     duration as "Затрачено (мин)", 
     length(filter(file.tasks, (t) => !t.completed)) as "Задач осталось"
-FROM "phase-1/1-hc"
+FROM "phase-1/4-log"
 WHERE type = "module"
 SORT file.name ASC
 ```
 
 ## 🏗 Технологическая цепочка
-0. [[hc-m0-0]] — Семантическая Инженерия
-1. [[hc-m1]] — CSS Core & Visual Styling
-2. [[hc-m2.md]] — Modern Layouts
-3. [[hc-m3.md]] — Инфраструктура и Методологии
-
+0. [[-m0-0]] — 
+1. [[-m1.md]] — 
+2. [[-m2.md]] — 
+3. [[-m3.md]] — 
+4. [[-m4.md]] — 
+5. [[-m5.md]] — 
+6. [[-m6.md]] — 
 
 ```dataviewjs
-// Карта захвата hc
-// Фильтр: папка "1-hc", файлы с "-m", исключая "moc"
-let modules = dv.pages('"phase-1/1-hc"')
+// Карта захвата JavaScript (v0.1.3)
+// Фильтр: папка "dc", файлы с "-m", исключая "moc"
+let modules = dv.pages('"phase-1/4-log"')
     .where(p => p.file.name.includes("-m") && !p.file.name.includes("moc"))
     .sort(p => p.file.name, 'asc');
 
@@ -37,11 +39,11 @@ dv.header(2, "🗺 Карта прогресса модулей");
 let tableData = [];
 
 for (let m of modules) {
-    // Используем lists.where(t => t.task) для гарантии подхвата чекбоксов
-    let tasks = m.file.lists.where(t => t.task);
+    let tasks = m.file.tasks;
     
+    // Функция отрисовки: ищет ключевые слова в чекбоксах файла модуля
     const drawSquares = (match, count) => {
-        let filtered = tasks.filter(t => t.text.toLowerCase().includes(match.toLowerCase()));
+        let filtered = tasks.filter(t => t.text.toLowerCase().includes(match));
         let completed = filtered.filter(t => t.completed).length;
         let line = "";
         for (let i = 0; i < count; i++) {
@@ -53,11 +55,13 @@ for (let m of modules) {
     tableData.push([
         m.file.link,
         drawSquares("теория", 1),
-        drawSquares("уровень", 5), 
-        drawSquares("комплекс", 5)
+        drawSquares("уровень", 5), // Твоя 5-ступенчатая "дрочка"
+        drawSquares("комплекс", 5) // 5 комплексных задач
     ]);
 }
 
 dv.table(["Модуль", "Теория", "Дрочка (5 ст.)", "Комплекс"], tableData);
 ```
 
+
+[[phase-1]]

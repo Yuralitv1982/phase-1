@@ -16,13 +16,13 @@ SORT module_id ASC
 ```
 
 ## 🏗 Технологическая цепочка
-0. [[obsidian-m0]] — Keyboard Ninja (База)
+0. [[obsidian-m0-0]] — Keyboard Ninja (База)
 1. [[obsidian-m1]] — Фундамент и среда (Fedora/PARA)
-2. [[obsidian_M2.md]] — Связи и структура (MOC/Graph)
-3. [[obsidian_M3.md]] — Интеграция с Git (Commit/Log)
-4. [[obsidian_M4.md]] — Observability (Dataview/Metrics)
-5. [[obsidian_M5.md]] — Single-Threaded (Workspace/Backlog)
-6. [[obsidian_M6.md]] — Архитектурный мост (Mermaid/Canvas)
-7. [[obsidian_M7.md]] — IDE/CLI Bridge (WebStorm)
-8. [[obsidian_M8.md]] — 7 Столпов (Менеджмент системы)
-9. [[obsidian_M9.md]] — Мастерство (Automation/Archive)
+2. [[obsidian_m2.md]] — Связи и структура (MOC/Graph)
+3. [[obsidian_m3.md]] — Интеграция с Git (Commit/Log)
+4. [[obsidian_m4.md]] — Observability (Dataview/Metrics)
+5. [[obsidian_m5.md]] — Single-Threaded (Workspace/Backlog)
+6. [[obsidian_m6.md]] — Архитектурный мост (Mermaid/Canvas)
+7. [[obsidian_m7.md]] — IDE/CLI Bridge (WebStorm)
+8. [[obsidian_m8.md]] — 7 Столпов (Менеджмент системы)
+9. [[obsidian_m9.md]] — Мастерство (Automation/Archive)

@@ -1,6 +1,6 @@
 ---
 type: module
-module_id: M1
+module_id: m1
 discipline: obsidian
 status: 🔴 Todo
 duration: 0

@@ -1,11 +1,11 @@
 ---
-discipline: dc
+discipline: eng
 type: MOC
 status: 🟡 В производстве
 pillars: 7_pillars_enabled
 ---
 
-# 🗺 Карта дисциплины: js
+# 🗺 Карта дисциплины: eng
 
 ## 📊 Состояние производства (Анализ и Аудит)
 ```dataview
@@ -13,13 +13,13 @@ TABLE
     status as "Статус", 
     duration as "Затрачено (мин)", 
     length(filter(file.tasks, (t) => !t.completed)) as "Задач осталось"
-FROM "phase-1/dc"
+FROM "phase-1/0-eng"
 WHERE type = "module"
 SORT file.name ASC
 ```
 
 ## 🏗 Технологическая цепочка
-0. [[arch-sw-m0-0]] — 
+0. [[eng-m0-0]] — thingk in English
 1. [[-m1.md]] — 
 2. [[-m2.md]] — 
 3. [[-m3.md]] — 
@@ -30,7 +30,7 @@ SORT file.name ASC
 ```dataviewjs
 // Карта захвата JavaScript (v0.1.3)
 // Фильтр: папка "dc", файлы с "-m", исключая "moc"
-let modules = dv.pages('"phase-1/dc"')
+let modules = dv.pages('"phase-1/0-eng"')
     .where(p => p.file.name.includes("-m") && !p.file.name.includes("moc"))
     .sort(p => p.file.name, 'asc');
 

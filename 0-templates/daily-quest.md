@@ -12,7 +12,9 @@
 	продолжаем..... 
 
 
-## 🕹 daily quest | <% tp.date.now("DD.MM.YYYY") %>
+## 🕹 daily quest 
+Текущая неделя  `$= moment().format("W")`
+Дата `$= moment().format("DD.MM.YYYY, dddd")`
 
 ## 🌍 глобальный таймер смены
 ```simple-time-tracker

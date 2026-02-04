@@ -3,7 +3,7 @@ type: module
 module_id: m0-0
 discipline: hc
 status: 🔴 Todo
-duration: 150
+duration: 210
 ---
 
 # Введение и Основы

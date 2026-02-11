@@ -241,3 +241,226 @@ tableRows.push(["**∑ TOTAL**", `**${(grandTotal / 60).toFixed(1)} ч**`, ""]);
 dv.table(["Дисциплина", "Всего (Accum)", "Неделя (Факт / План)"], tableRows);
 ```
 
+
+```dataviewjs
+// ==========================================================
+// 📊 MASTERY HISTOGRAM (Standalone Version)
+// ==========================================================
+
+// --- НАСТРОЙКИ ---
+const DAILY_FOLDER = "0-dayly"; 
+const MASTERY_LIMIT = 300; // Цель в часах
+
+// Поля, которые мы игнорируем (не дисциплины)
+const IGNORE = ["file", "shift", "tags", "aliases", "position", "created", "cssclasses", "tasks", "outlinks", "inlinks", "total (h)"];
+
+// --- 1. СБОР ДАННЫХ ---
+let stats = {};
+let totalAccumulatedMin = 0;
+
+const getNum = (val) => Array.isArray(val) ? Number(val[0]) || 0 : Number(val) || 0;
+
+// Собираем ВСЕ файлы из папки отчетов
+let pages = dv.pages(`"${DAILY_FOLDER}"`);
+
+for (let p of pages) {
+    for (let [key, val] of Object.entries(p)) {
+        let cleanKey = key.toLowerCase();
+        
+        // Маппинг: js-theory/js-practice -> js
+        if (cleanKey.endsWith("-theory") || cleanKey.endsWith("-practice")) {
+            cleanKey = cleanKey.split("-")[0];
+        }
+
+        // Фильтр мусора
+        if (IGNORE.includes(cleanKey) || key.startsWith("file")) continue;
+
+        let mins = getNum(val);
+        if (mins > 0) {
+            if (!stats[cleanKey]) stats[cleanKey] = 0;
+            stats[cleanKey] += mins;
+            totalAccumulatedMin += mins;
+        }
+    }
+}
+
+// --- 2. СОРТИРОВКА И ПРЕДСТАВЛЕНИЕ ---
+// Превращаем в массив и сортируем по убыванию времени
+let sortedEntries = Object.entries(stats).sort((a, b) => b[1] - a[1]);
+
+// --- 3. РЕНДЕР ГИСТОГРАММЫ ---
+dv.header(2, `🏆 гистограмма успеваемости(${MASTERY_LIMIT}ч)`);
+
+let html = `<div style="display: flex; flex-direction: column; gap: 15px; background: #111; padding: 20px; border-radius: 12px; border: 1px solid #333; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">`;
+
+for (let [name, mins] of sortedEntries) {
+    let hours = mins / 60;
+    let pct = Math.min((hours / MASTERY_LIMIT) * 100, 100).toFixed(1);
+    
+    // Цвет: золотистый, если цель близка или достигнута
+    let barColor = hours >= MASTERY_LIMIT ? "#f7df1e" : "#e5c07b";
+    let glow = hours >= MASTERY_LIMIT ? "0 0 12px #f7df1e88" : "none";
+
+    html += `
+    <div style="margin-bottom: 5px;">
+        <div style="display:flex; justify-content:space-between; font-family: 'JetBrains Mono', monospace; font-size: 13px; margin-bottom: 6px;">
+            <span style="font-weight:bold; color: #ddd; text-transform: uppercase;">${name}</span>
+            <span style="color: #aaa;">${hours.toFixed(1)} / ${MASTERY_LIMIT} ч</span>
+        </div>
+        <div style="width: 100%; background: #222; height: 16px; border-radius: 4px; border: 1px solid #333; overflow: hidden; position: relative;">
+            <div style="width: ${pct}%; background: ${barColor}; height: 100%; box-shadow: ${glow}; transition: width 0.8s ease-in-out;"></div>
+            <div style="position: absolute; right: 8px; top: 0; font-size: 10px; line-height: 16px; color: rgba(255,255,255,0.5); font-weight: bold;">${pct}%</div>
+        </div>
+    </div>`;
+}
+
+// Подвал с общим итогом
+html += `
+    <div style="margin-top: 15px; border-top: 1px solid #444; padding-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+        <span style="color: #888; font-size: 12px; font-style: italic;">Накоплено во всех дисциплинах</span>
+        <span style="font-size: 18px; font-weight: bold; color: #eee; font-family: monospace;">∑ ${(totalAccumulatedMin/60).toFixed(1)} h</span>
+    </div>
+</div>`;
+
+dv.paragraph(html);
+```
+
+```dataviewjs
+// ==========================================================
+// 🟢 WEEKLY TACTICAL GRID (40H)
+// ==========================================================
+
+// --- НАСТРОЙКИ ---
+const DAILY_FOLDER = "0-dayly"; 
+const WEEK_GOAL = 40; // Цель часов на неделю
+
+// 🛑 ЧЕРНЫЙ СПИСОК (Фильтр мусора)
+const IGNORE_FIELDS = [
+    "file", "shift", "tags", "aliases", "position", "created", "cssclasses", 
+    "tasks", "outlinks", "inlinks", "cover", "status", "type",
+    "global-duration", "obsidion", "effective-time", "waste-time", "global-shift",
+    "total", "debt", "start-time", "end-time", "mood", "total (h)"
+];
+
+// --- 1. СЧИТАЕМ ЧАСЫ ЗА НЕДЕЛЮ ---
+let weeklyTotalMin = 0;
+
+// Хелпер для получения цифр
+const getNum = (val) => {
+    if (Array.isArray(val)) return Number(val[0]) || 0;
+    return Number(val) || 0;
+};
+
+let pages = dv.pages(`"${DAILY_FOLDER}"`);
+
+for (let p of pages) {
+    // Проверяем, относится ли файл к ТЕКУЩЕЙ НЕДЕЛЕ
+    if (moment(p.file.name).isoWeek() !== moment().isoWeek()) continue;
+    if (moment(p.file.name).year() !== moment().year()) continue;
+
+    for (let [key, val] of Object.entries(p)) {
+        // Фильтруем системные поля и мусор
+        let cleanKey = key.toLowerCase();
+        if (cleanKey.endsWith("-theory") || cleanKey.endsWith("-practice")) cleanKey = cleanKey.split("-")[0];
+        
+        if (IGNORE_FIELDS.includes(cleanKey) || key.startsWith("file")) continue;
+        
+        let mins = getNum(val);
+        if (mins > 0) weeklyTotalMin += mins;
+    }
+}
+
+// --- 2. РИСУЕМ ГРИД (HTML) ---
+let currentHours = weeklyTotalMin / 60;
+let filledSquares = Math.floor(currentHours);
+if (filledSquares > WEEK_GOAL) filledSquares = WEEK_GOAL; // Не вылезаем за рамки
+
+let percent = ((currentHours / WEEK_GOAL) * 100).toFixed(1);
+
+// Генерируем 40 квадратов
+let squaresHTML = "";
+for (let i = 0; i < WEEK_GOAL; i++) {
+    let color = (i < filledSquares) ? "#46bc46" : "#333"; // Зеленый vs Темно-серый
+    squaresHTML += `<div style="width:14px; height:14px; background:${color}; margin:2px; border-radius:2px;"></div>`;
+}
+
+// Выводим блок
+dv.paragraph(`
+<div style="background: #161616; padding: 15px; border-radius: 8px; border: 1px solid #333; max-width: 300px;">
+    <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-weight:bold; color:#eee; font-size: 14px;">
+        <span>🟢 WEEKLY TACTICS</span>
+        <span style="color: #46bc46;">${currentHours.toFixed(1)} / ${WEEK_GOAL} ч (${percent}%)</span>
+    </div>
+    
+    <div style="display: flex; flex-wrap: wrap;">
+        ${squaresHTML}
+    </div>
+</div>
+`);
+```
+
+```dataviewjs
+// ==========================================================
+// 🔵 YEARLY STRATEGIC GRID v2.0 (MAXI SCALE)
+// ==========================================================
+
+// --- НАСТРОЙКИ ---
+const DAILY_FOLDER = "0-dayly"; 
+const YEAR_GOAL = 2080; 
+const CURRENT_YEAR = 2026;
+
+const IGNORE_FIELDS = [
+    "file", "shift", "tags", "aliases", "position", "created", "cssclasses", 
+    "tasks", "outlinks", "inlinks", "cover", "status", "type",
+    "global-duration", "obsidion", "effective-time", "waste-time", "global-shift",
+    "total", "debt", "start-time", "end-time", "mood", "total (h)"
+];
+
+// --- 1. СБОР ДАННЫХ ---
+let yearlyTotalMin = 0;
+const getNum = (val) => Array.isArray(val) ? Number(val[0]) || 0 : Number(val) || 0;
+
+let pages = dv.pages(`"${DAILY_FOLDER}"`);
+for (let p of pages) {
+    if (moment(p.file.name).year() !== CURRENT_YEAR) continue;
+    for (let [key, val] of Object.entries(p)) {
+        let cleanKey = key.toLowerCase();
+        if (cleanKey.endsWith("-theory") || cleanKey.endsWith("-practice")) cleanKey = cleanKey.split("-")[0];
+        if (IGNORE_FIELDS.includes(cleanKey) || key.startsWith("file")) continue;
+        let mins = getNum(val);
+        if (mins > 0) yearlyTotalMin += mins;
+    }
+}
+
+// --- 2. РЕНДЕР (УВЕЛИЧЕННЫЙ МАСШТАБ) ---
+let currentHours = yearlyTotalMin / 60;
+let filledSquares = Math.floor(currentHours);
+if (filledSquares > YEAR_GOAL) filledSquares = YEAR_GOAL;
+let percent = ((currentHours / YEAR_GOAL) * 100).toFixed(1);
+
+let gridArray = new Array(YEAR_GOAL);
+for (let i = 0; i < YEAR_GOAL; i++) {
+    // Используем 10px для масштаба 2.5x
+    let color = (i < filledSquares) ? "#2d72d9" : "#222"; 
+    gridArray[i] = `<div style="width:10px; height:10px; background:${color}; margin:1px; border-radius:1px; flex-shrink: 0;"></div>`;
+}
+
+dv.paragraph(`
+<div style="background: #111; padding: 20px; border-radius: 12px; border: 1px solid #333; width: 100%;">
+    <div style="display:flex; justify-content:space-between; margin-bottom:15px; font-weight:bold; color:#eee; font-size: 16px; font-family: monospace;">
+        <span>🔵 YEARLY STRATEGY</span>
+        <span style="color: #2d72d9;">${currentHours.toFixed(1)} / ${YEAR_GOAL} ч (${percent}%)</span>
+    </div>
+    
+    <div style="display: flex; flex-wrap: wrap; justify-content: flex-start; align-content: flex-start; gap: 0px;">
+        ${gridArray.join("")}
+    </div>
+</div>
+`);
+
+
+
+```
+
+
+

@@ -106,4 +106,4 @@ dv.paragraph(`*Осталось: ${TARGET_HOURS - totalHours} ч.*`);
 ```
 
 
-[[phase-1]]
+[[phase-1 [[map]]]]

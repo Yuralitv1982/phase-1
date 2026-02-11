@@ -1,69 +1,100 @@
 .
 ├── 0-dayly
-│   ├── 2026-01-17.md
-│   ├── 2026-01-18.md
-│   ├── 2026-01-20.md
-│   ├── 2026-01-21.md
-│   ├── 2026-01-22.md
-│   ├── 2026-01-24.md
-│   ├── 2026-01-26.md
-│   └── 2026-01-27.md
+│   ├── 2026-01-17.md
+│   ├── 2026-01-18.md
+│   ├── 2026-01-20.md
+│   ├── 2026-01-21.md
+│   ├── 2026-01-22.md
+│   ├── 2026-01-24.md
+│   ├── 2026-01-26.md
+│   ├── 2026-01-27.md
+│   ├── 2026-01-28.md
+│   ├── 2026-01-29.md
+│   ├── 2026-01-30.md
+│   ├── 2026-02-02.md
+│   ├── 2026-02-03.md
+│   ├── 2026-02-04.md
+│   ├── 2026-02-05.md
+│   ├── 2026-02-06.md
+│   ├── 2026-02-08.md
+│   └── 2026-02-09.md
 ├── 0-general
-│   ├── Analytics_GUI.md
-│   ├── cycle.md
-│   ├── git-memory.md
-│   ├── system-arch.md
-│   ├── system-upd.md
-│   └── system.md
+│   ├── Analytics_GUI.md
+│   ├── cycle.md
+│   ├── git-memory.md
+│   ├── system-arch.md
+│   ├── system.md
+│   └── system-upd.md
 ├── 0-templates
-│   ├── daily-quest.md
-│   ├── discipline-moc.md
-│   └── module.md
+│   ├── daily-quest.md
+│   ├── discipline-moc.md
+│   └── module.md
+├── 2026-02-10.md
+├── dayly-drill
+│   ├── 2026-02-05_15-56-drill-js-m0
+│   │   ├── 05-02-26.md
+│   │   ├── index.html
+│   │   ├── script.js
+│   │   └── style.css
+│   ├── 2026-02-05_18-06-drill-hc-m0
+│   │   ├── index.html
+│   │   ├── script.js
+│   │   └── style.css
+│   ├── 2026-02-05_18-30-drill-hc-m0
+│   │   ├── index.html
+│   │   ├── script.js
+│   │   └── style.css
+│   └── 2026-02-05_18-46-drill-hc-m0
+│       ├── index.html
+│       ├── script.js
+│       └── style.css
 ├── mkdisc.sh
 ├── phase-1
-│   ├── 0-eng
-│   │   ├── eng-m0-0.md
-│   │   └── eng-moc.md
-│   ├── 1-hc
-│   │   ├── hc-m0-0.md
-│   │   ├── hc-m0-1.md
-│   │   ├── hc-m0-2.md
-│   │   ├── hc-m1.md
-│   │   └── hc-moc.md
-│   ├── 2-js
-│   │   ├── js-m0-0.md
-│   │   ├── js-m0-1.md
-│   │   ├── js-m0-2.md
-│   │   └── js-moc.md
-│   ├── 3-utl
-│   │   ├── bash
-│   │   ├── git
-│   │   │   └── git-moc.md
-│   │   ├── helix
-│   │   │   └── hx-moc.md
-│   │   ├── linux
-│   │   ├── obsidian
-│   │   │   ├── obsidian-m0-0.md
-│   │   │   ├── obsidian-m0-1.md
-│   │   │   ├── obsidian-m0-2.md
-│   │   │   ├── obsidian-m1.md
-│   │   │   ├── obsidian-m2.md
-│   │   │   └── obsidian-moc.md
-│   │   ├── utl-moc.md
-│   │   └── webstorm
-│   ├── 4-log
-│   │   └── log-moc.md
-│   ├── 5-tnk
-│   │   ├── tnk-m0.md
-│   │   └── tnk-moc.md
-│   ├── 6-arc
-│   │   ├── arch-hw
-│   │   └── arch-sw
-│   │       ├── arc-sw-moc.md
-│   │       └── arch-sw-m0-0.md
-│   ├── 7-con
-│   │   └── con-moc.md
-│   ├── 8-prj
-│   └── phase-1.md
+│   ├── 0-eng
+│   │   ├── eng-m0-0.md
+│   │   └── eng-moc.md
+│   ├── 1-hc
+│   │   ├── hc-m0-0.md
+│   │   ├── hc-m0-1.md
+│   │   ├── hc-m0-2.md
+│   │   ├── hc-m1.md
+│   │   └── hc-moc.md
+│   ├── 2-js
+│   │   ├── js-m0-0.md
+│   │   ├── js-m0-1.md
+│   │   ├── js-m0-2.md
+│   │   └── js-moc.md
+│   ├── 3-utl
+│   │   ├── bash
+│   │   ├── git
+│   │   │   └── git-moc.md
+│   │   ├── helix
+│   │   │   └── hx-moc.md
+│   │   ├── linux
+│   │   ├── obsidian
+│   │   │   ├── obsidian-m0-0.md
+│   │   │   ├── obsidian-m0-1.md
+│   │   │   ├── obsidian-m0-2.md
+│   │   │   ├── obsidian-m1.md
+│   │   │   ├── obsidian-m2.md
+│   │   │   └── obsidian-moc.md
+│   │   ├── utl-moc.md
+│   │   └── webstorm
+│   ├── 4-log
+│   │   └── log-moc.md
+│   ├── 5-tnk
+│   │   ├── tnk-m0.md
+│   │   └── tnk-moc.md
+│   ├── 6-arc
+│   │   ├── arch-hw
+│   │   └── arch-sw
+│   │       ├── arch-sw-m0-0.md
+│   │       └── arc-sw-moc.md
+│   ├── 7-con
+│   │   └── con-moc.md
+│   ├── 8-prj
+│   └── phase-1.md
 ├── README.md
 └── structure.txt
+
+27 directories, 71 files

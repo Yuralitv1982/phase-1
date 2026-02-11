@@ -61,3 +61,39 @@ for (let m of modules) {
 dv.table(["Модуль", "Теория", "Дрочка (5 ст.)", "Комплекс"], tableData);
 ```
 
+
+```dataviewjs
+// --- НАСТРОЙКИ ---
+const TARGET_HOURS = 200; // Цель
+const KEY = "hc";          // Имя ключа в daily-quest (js:: 60)
+// -----------------
+
+// 1. Считаем время
+let pages = dv.pages('"0-dayly"');
+let totalMin = 0;
+
+for (let p of pages) {
+    if (p[KEY]) totalMin += p[KEY];
+}
+
+let totalHours = Math.floor(totalMin / 60);
+let percent = ((totalHours / TARGET_HOURS) * 100).toFixed(1);
+
+// 2. Рисуем Хедер
+dv.header(2, `🚀 hc Architect: ${totalHours} / ${TARGET_HOURS} ч. (${percent}%)`);
+
+// 3. Рисуем Сетку (Оптимизированный рендеринг)
+const html = `<div style="display: flex; flex-wrap: wrap; gap: 1px; max-width: 700px;">
+${Array.from({length: TARGET_HOURS}).map((_, i) => {
+    let color = i < totalHours ? "#46bc46" : "#222"; 
+    return `<div style="width: 8px; height: 8px; background: ${color};"></div>`
+}).join('')}
+</div>`;
+
+dv.paragraph(html);
+
+// 4. Инфо
+dv.paragraph(`*Осталось: ${TARGET_HOURS - totalHours} ч.*`);
+```
+
+

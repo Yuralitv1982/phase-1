@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sleep</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+<header class="header">
+    <nav class="header__nav container">
+        <a href="#" class="header__logo">
+            <svg class="icon" width="64" height="64">
+                <use href="assets/sprite.svg#icon-logo"></use>
+            </svg>
+        </a>
+        <ul class="header__list">
+            <li><a href="#hero" class="header__link">Start</a></li>
+            <li><a href="#about" class="header__link">About</a></li>
+        </ul>
+    </nav>
+</header>
+<main id="content" class="main-content">
+    <section class="hero-sleep">
+        <div class="container">
+            <h1>Master Your Sleep Architecture</h1>
+            <p>The single-threaded mode for your brain starts here.</p>
+            <div class="schedule">
+                <p>Focus Period:
+                    <time datetime="22:00">22:00</time>
+                    —
+                    <time datetime="05:00">05:00</time>
+                </p>
+            </div>
+            <button type="button" class="btn-start">
+                <span>Start Night Mode</span>
+                <svg class="icon" width="60" height="60">
+                    <use href="assets/sprite.svg#icon-tower"></use>
+                </svg>
+            </button>
+        </div>
+    </section>
+</main>
+<footer class="footer">
+    <div class="container">
+        <address class="footer__address">
+            <p>Ukraine, Zaporizhzhia</p>
+            <p>Focus Period:
+                <time datetime="22:00">22:00</time>
+                —
+                <time datetime="05:00">05:00</time>
+            </p>
+        </address>
+        <nav class="footer__social" aria-label="Social links">
+            <a href="#" class="footer__social-link">
+                <svg class="icon">
+                    <use href="assets/sprite.svg#icon-facebook"></use>
+                </svg>
+            </a>
+        </nav>
+    </div>
+    <p class="footer__copy">&copy; 2026 Software Architect. All rights reserved.</p>
+</footer>
+<dialog id="modal-root" class="modal">
+</dialog>
+</body>
+</html>

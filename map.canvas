@@ -1,9 +1,37 @@
 {
 	"nodes":[
-		{"id":"1fa940fe86e3897e","x":-20,"y":0,"width":250,"height":80,"type":"text","text":"        phase-1\n"},
-		{"id":"b9709204dc92d1da","x":-270,"y":140,"width":250,"height":60,"type":"text","text":"js [[js-moc]]"},
-		{"id":"87144e5cab34812c","x":-270,"y":260,"width":250,"height":60,"type":"text","text":"hc\n"},
-		{"id":"70b545854c13131a","x":-270,"y":380,"width":250,"height":60,"type":"text","text":"log"}
+		{"id":"b9709204dc92d1da","type":"text","text":"js base [[js-moc]]","x":-340,"y":160,"width":160,"height":60},
+		{"id":"87144e5cab34812c","type":"text","text":"hc base\n\n","x":-152,"y":160,"width":125,"height":60},
+		{"id":"dbba5e2866e58e9d","type":"text","text":"hc-architect","x":-152,"y":460,"width":125,"height":60},
+		{"id":"b22ec971285609b3","type":"text","text":"base arch (sw & hw)","x":0,"y":160,"width":175,"height":60},
+		{"id":"0b43a8a5e97575d7","type":"text","text":"obsidian","x":240,"y":460,"width":125,"height":60},
+		{"id":"a25a9be79f7e34c2","type":"text","text":"webstorm\n","x":395,"y":460,"width":125,"height":60},
+		{"id":"aa6bce6f11db6057","type":"text","text":"arch sw","x":-27,"y":295,"width":120,"height":55},
+		{"id":"c2ded572944b1b3f","type":"text","text":"arch hw","x":115,"y":295,"width":125,"height":55},
+		{"id":"c294e572342e49d5","type":"text","text":"git base","x":200,"y":160,"width":125,"height":60},
+		{"id":"603478d2d9e803e1","type":"text","text":"env","x":358,"y":160,"width":100,"height":60},
+		{"id":"1fa940fe86e3897e","type":"text","text":"phase 1","x":-180,"y":-120,"width":120,"height":60},
+		{"id":"ed04b2048f90e5ff","type":"text","text":"english","x":-490,"y":162,"width":120,"height":60},
+		{"id":"70b545854c13131a","type":"text","text":"logic","x":-480,"y":460,"width":100,"height":60},
+		{"id":"369bccaeae1f2085","type":"text","text":"os linux base\n","x":-680,"y":158,"width":160,"height":64},
+		{"id":"895a71409561774a","type":"text","text":"cli & os utils","x":-680,"y":295,"width":160,"height":50},
+		{"id":"3336cb6fc02ff5f0","type":"text","text":"bash","x":-660,"y":460,"width":120,"height":60}
 	],
-	"edges":[]
+	"edges":[
+		{"id":"69af652bf9ce9198","fromNode":"1fa940fe86e3897e","fromSide":"bottom","toNode":"ed04b2048f90e5ff","toSide":"top"},
+		{"id":"f752b850af2349dc","fromNode":"1fa940fe86e3897e","fromSide":"bottom","toNode":"87144e5cab34812c","toSide":"top"},
+		{"id":"d40b53bbefc4a5cf","fromNode":"87144e5cab34812c","fromSide":"bottom","toNode":"dbba5e2866e58e9d","toSide":"top"},
+		{"id":"7ed261753d33b992","fromNode":"1fa940fe86e3897e","fromSide":"bottom","toNode":"b9709204dc92d1da","toSide":"top"},
+		{"id":"058a2ae0857efb6b","fromNode":"1fa940fe86e3897e","fromSide":"bottom","toNode":"369bccaeae1f2085","toSide":"top"},
+		{"id":"8b9e56a7f35268cf","fromNode":"895a71409561774a","fromSide":"bottom","toNode":"3336cb6fc02ff5f0","toSide":"top"},
+		{"id":"bf6bff37039077a5","fromNode":"369bccaeae1f2085","fromSide":"bottom","toNode":"895a71409561774a","toSide":"top"},
+		{"id":"fc91e4c8d9a6794c","fromNode":"1fa940fe86e3897e","fromSide":"bottom","toNode":"70b545854c13131a","toSide":"top"},
+		{"id":"21b6a5efe63a8db6","fromNode":"1fa940fe86e3897e","fromSide":"bottom","toNode":"b22ec971285609b3","toSide":"top"},
+		{"id":"8e79e3f22bb166f3","fromNode":"1fa940fe86e3897e","fromSide":"bottom","toNode":"603478d2d9e803e1","toSide":"top"},
+		{"id":"5a7c8b90beb6e241","fromNode":"603478d2d9e803e1","fromSide":"bottom","toNode":"a25a9be79f7e34c2","toSide":"top"},
+		{"id":"f76a0f0331c3defb","fromNode":"603478d2d9e803e1","fromSide":"bottom","toNode":"0b43a8a5e97575d7","toSide":"top"},
+		{"id":"cb33fe7f935445d9","fromNode":"b22ec971285609b3","fromSide":"bottom","toNode":"aa6bce6f11db6057","toSide":"top"},
+		{"id":"5859d0ff6e5b1fe1","fromNode":"b22ec971285609b3","fromSide":"bottom","toNode":"c2ded572944b1b3f","toSide":"top"},
+		{"id":"0882ce893a0114d1","fromNode":"1fa940fe86e3897e","fromSide":"bottom","toNode":"c294e572342e49d5","toSide":"top"}
+	]
 }

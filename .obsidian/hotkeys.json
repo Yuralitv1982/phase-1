@@ -133,15 +133,6 @@
       "key": "="
     }
   ],
-  "editor:insert-codeblock": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "K"
-    }
-  ],
   "editor:toggle-highlight": [
     {
       "modifiers": [
@@ -175,5 +166,6 @@
       ],
       "key": "]"
     }
-  ]
+  ],
+  "obsidian-excalidraw-plugin:save": []
 }

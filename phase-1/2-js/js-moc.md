@@ -101,9 +101,7 @@ dv.paragraph(html);
 // 4. Инфо
 dv.paragraph(`*Осталось: ${TARGET_HOURS - totalHours} ч.*`);
 ```
-```dataviewjs
 
-```
 
 
 [[phase-1 [[map]]]]

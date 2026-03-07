@@ -31,7 +31,7 @@ SORT file.name ASC
 // Карта захвата JavaScript (v0.1.3)
 // Фильтр: папка "js", файлы с "-m", исключая "moc"
 let modules = dv.pages('"phase-1/2-js"')
-    .where(p => p.file.name.includes("-m") && !p.file.name.includes("moc"))
+    .where(p => p.file.name.includes("js-m0") && !p.file.name.includes("moc"))
     .sort(p => p.file.name, 'asc');
 
 dv.header(2, "🗺 Карта прогресса модулей");

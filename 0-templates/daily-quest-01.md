@@ -114,3 +114,15 @@ if (shift > 0) {
 } else {
     dv.paragraph("⚠️ **Shift = 0**. Впиши время смены, чтобы увидеть расчет.");
 }
+
+```
+
+## 🔄 Дрилы и Повторения (Spaced Repetition)
+*Динамический пул задач, требующих отработки именно сегодня.*
+
+```dataview
+LIST "🎯 " + active_drill + choice(rep_count < 7, " | 🔨 Дрочка: " + rep_count + "/7", " | 🧠 Поддержка: шаг " + sr_step)
+FROM "phase-1"
+WHERE type = "module" AND next_review <= date(today)
+SORT next_review ASC
+```

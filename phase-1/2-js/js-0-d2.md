@@ -6,8 +6,8 @@ status: 🔴 Todo
 duration: 240
 active_drill: Сет задач 2
 rep_count: 7
-sr_step: 1
-next_review: 2026-03-10
+sr_step: 2
+next_review: 2026-03-17
 ---
 # Введение и Основы
 

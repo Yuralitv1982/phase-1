@@ -4,11 +4,10 @@ module_id: m0-
 discipline: dc
 status: 🔴 Todo
 duration: 0
-# --- Отслеживание дрилов ---
-active_drill: "Сет задач 1"
+active_drill: Сет задач 1
 rep_count: 0
 sr_step: 0
-next_review: 2026-03-07
+next_review:
 ---
 # Введение и Основы
 

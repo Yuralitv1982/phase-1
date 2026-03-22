@@ -1,0 +1,16 @@
+project-alpha
+├── .editorconfig
+├── .env
+├── .gitignore
+├── config
+│   ├── settings.json
+│   └── settings.json.bak
+├── doc
+│   └── readme.md
+├── src
+│   ├── api.js
+│   ├── js
+│   │   ├── index.js
+│   │   └── utils.js
+│   └── style.css
+└── structure.txt

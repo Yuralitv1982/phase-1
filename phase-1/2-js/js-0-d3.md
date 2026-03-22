@@ -1,11 +1,11 @@
 ---
 type: module
-module_id: m0-
-discipline: dc
+module_id: m0-drill-3
+discipline: js
 status: 🔴 Todo
-duration: 130
+duration: 0
 active_drill: Сет задач 3
-rep_count: 5
+rep_count: 0
 sr_step: 0
 next_review:
 ---

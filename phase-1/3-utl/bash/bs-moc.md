@@ -1,5 +1,5 @@
 ---
-discipline: dc
+discipline: dbs
 type: MOC
 status: 🟡 В производстве
 pillars: 7_pillars_enabled
@@ -13,19 +13,19 @@ TABLE
     status as "Статус", 
     duration as "Затрачено (мин)", 
     length(filter(file.tasks, (t) => !t.completed)) as "Задач осталось"
-FROM "phase-1/dc"
+FROM "phase-1/3-utl/bash"
 WHERE type = "module"
 SORT file.name ASC
 ```
 
 ## 🏗 Технологическая цепочка
-0. [[bs-m1-crib]] — 
-1. [[-m1.md]] — 
-2. [[-m2.md]] — 
-3. [[-m3.md]] — 
-4. [[-m4.md]] — 
-5. [[-m5.md]] — 
-6. [[-m6.md]] — 
+
+0. [[bs-m1-crib]] — Введение в Командную
+1. [[-m2.md]] — 
+2. [[-m3.md]] — 
+3. [[-m4.md]] — 
+4. [[-m5.md]] — 
+5. [[-m6.md]] — 
 
 ```dataviewjs
 // Карта захвата JavaScript (v0.1.3)

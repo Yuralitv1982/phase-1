@@ -21,6 +21,7 @@
         
     - `sr_step: 3` -> `next_review` на +14 дней
         
-    - `sr_step: 4` -> `next_review` на +30 дней
+    - `sr_step: 4` -> `next_review` на +21 день
         
-    - `sr_step: 5` -> Меняешь `status: active` на `status: done`. Код вшит в подкорку.
+    - `sr_step: 5` -> next_review на 28 день  
+    - Меняешь `status: active` на `status: done`. Код вшит в подкорку.

@@ -3,9 +3,9 @@ type: module
 module_id: m0-drill-5
 discipline: js
 status: 🔴 Todo
-duration: 90
+duration: 0
 active_drill: Сет задач 5
-rep_count: 1
+rep_count: 0
 sr_step: 0
 next_review:
 ---

@@ -7,7 +7,7 @@ duration: 0
 active_drill: Сет задач 1
 rep_count: 0
 sr_step: 0
-next_review:
+next_review: mm/dd/yy
 ---
 # Введение и Основы
 

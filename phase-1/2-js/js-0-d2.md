@@ -2,17 +2,17 @@
 type: module
 module_id: m0-drill-2
 discipline: js
-status: 🔴 Todo
-duration: 240
+status: 🔴 done
+duration: 0
 active_drill: Сет задач 2
-rep_count: 7
-sr_step: 2
-next_review: 2026-03-17
+rep_count: 1
+sr_step: 0
+next_review:
 ---
 # Введение и Основы
 
 ## 🔨 2. Дрочка (Drills) (80%)
-- [x] Сет задач 2
+- [ ] Сет задач 2
 	Уровень 2: Продвинутый новичок (Type Coercion & Primitives)
 	Фокус: Преобразования типов и предсказуемость результата.
 

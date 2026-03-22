@@ -3,16 +3,17 @@ type: module
 module_id: m0-drill-1
 discipline: js
 status: 🔴 done
-duration: 240
+duration: 0
 active_drill: Сет задач 1
-rep_count: 7
-sr_step: 1
-next_review:
+rep_count: 1
+sr_step: 0
+next_review: 2026-03-22
 ---
 # Введение и Основы
 
 ## 🔨 2. Дрочка (Drills) (80%)
-- [x] Сет задач 1
+- [ ] Сет задач 1
+Объявление и базовый вывод.
 
     Environment: Создай HTML, подключи JS через defer. Выведи в консоль 'System Initialized' и 'Error: Check path' разными методами console.
 
@@ -26,3 +27,4 @@ next_review:
 
 
 
+[[js-m0-crib]]

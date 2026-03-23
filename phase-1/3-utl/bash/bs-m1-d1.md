@@ -5,7 +5,7 @@ discipline: bs
 status: 🔴 Todo
 duration: 20
 active_drill: Сет задач 1
-rep_count: 1
+rep_count: 2
 sr_step: 0
 next_review: mm/dd/yy
 ---

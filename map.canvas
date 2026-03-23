@@ -9,7 +9,6 @@
 		{"id":"1fa940fe86e3897e","type":"text","text":"phase 1","x":-380,"y":-460,"width":120,"height":60,"color":"1"},
 		{"id":"50f1cc219f64427d","type":"text","text":"текущий","x":-665,"y":560,"width":125,"height":50,"color":"4"},
 		{"id":"9ddaf5094bb70c77","type":"text","text":"закончен","x":-665,"y":640,"width":125,"height":50},
-		{"id":"895a71409561774a","type":"text","text":"cli base & os utils","x":341,"y":-40,"width":208,"height":50,"color":"4"},
 		{"id":"a25a9be79f7e34c2","type":"text","text":"webstorm\n","x":341,"y":37,"width":208,"height":50,"color":"3"},
 		{"id":"c294e572342e49d5","type":"text","text":"git base","x":343,"y":110,"width":204,"height":103,"color":"2"},
 		{"id":"1ebc64003e0b9b41","type":"text","text":"от потребителя к создателю","x":343,"y":390,"width":204,"height":100,"color":"2"},
@@ -19,14 +18,15 @@
 		{"id":"e0219cea0581453c","type":"text","text":"helix\n","x":341,"y":-120,"width":208,"height":50,"color":"3"},
 		{"id":"fca1c61bf4c6360f","type":"text","text":"Блок 1: \nВведение и Основы [[js-m0-crib]]","x":-1223,"y":-300,"width":184,"height":462},
 		{"id":"25f140423ffaba4b","type":"text","text":"Объявление и базовый вывод \n[[js-m0-d1]]","x":-1460,"y":-294,"width":200,"height":104},
-		{"id":"ae7ef2440733aa7a","type":"text","text":"Преобразования \nтипов\n[[js-0-d2]]","x":-1460,"y":-155,"width":200,"height":85},
-		{"id":"c5b7fa165d9a345e","x":-1460,"y":-31,"width":200,"height":93,"type":"text","text":"Ветвления\n[[js-0-d3]]"},
-		{"id":"5f89222907dca642","x":-1460,"y":87,"width":200,"height":75,"type":"text","text":""},
+		{"id":"ae7ef2440733aa7a","type":"text","text":"Преобразования \nтипов\n[[js-m0-d2]]","x":-1460,"y":-155,"width":200,"height":85},
+		{"id":"c5b7fa165d9a345e","type":"text","text":"Ветвления\n[[js-m0-d3]]","x":-1460,"y":-31,"width":200,"height":93},
+		{"id":"5f89222907dca642","type":"text","text":"","x":-1460,"y":87,"width":200,"height":75},
 		{"id":"b22ec971285609b3","type":"text","text":"base arch (sw & hw)","x":-940,"y":405,"width":160,"height":85,"color":"3"},
 		{"id":"aa6bce6f11db6057","type":"text","text":"arch sw","x":-940,"y":560,"width":160,"height":60,"color":"2"},
 		{"id":"c2ded572944b1b3f","type":"text","text":"arch hw","x":-940,"y":690,"width":160,"height":80,"color":"2"},
 		{"id":"ed04b2048f90e5ff","type":"text","text":"english","x":-722,"y":-294,"width":120,"height":70,"color":"4"},
-		{"id":"b9709204dc92d1da","type":"text","text":"js base [[js-moc]]\n","x":-1211,"y":-400,"width":160,"height":70,"color":"4"}
+		{"id":"b9709204dc92d1da","type":"text","text":"js base [[js-moc]]\n","x":-1211,"y":-400,"width":160,"height":70,"color":"4"},
+		{"id":"895a71409561774a","type":"text","text":"cli base & os utils","x":341,"y":-48,"width":208,"height":50,"color":"4"}
 	],
 	"edges":[
 		{"id":"69af652bf9ce9198","fromNode":"1fa940fe86e3897e","fromSide":"bottom","toNode":"ed04b2048f90e5ff","toSide":"top"},

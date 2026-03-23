@@ -5,9 +5,9 @@ discipline: js
 status: 🔴 done
 duration: 0
 active_drill: Сет задач 1
-rep_count: 1
+rep_count: 6
 sr_step: 0
-next_review: 2026-03-22
+next_review:
 ---
 # Введение и Основы
 

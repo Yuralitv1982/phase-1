@@ -5,7 +5,7 @@ discipline: js
 status: 🔴 Todo
 duration: 0
 active_drill: Сет задач 3
-rep_count: 0
+rep_count: 4
 sr_step: 0
 next_review:
 ---

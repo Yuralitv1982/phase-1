@@ -1,0 +1,33 @@
+// Drill: drill-12-14
+// RAM-mode: ACTIVE
+console.log('Strict Airbnb environment is ready!');
+
+const createUser = (name, role = 'guest') => {
+  return `user name : ${name} , user role : ${role}`;
+};
+
+console.log(createUser('yurec'));
+
+const sumAll = (...nums) => nums.reduce((sum, n) => sum + n, 0);
+
+console.log(sumAll(1, 2, 3, 4, 5, 6, 6));
+
+function logConfig(appName, version = '1.0', ...features) {
+  return `App : ${appName}; version = ${version} ; ${features}`;
+}
+
+console.log(logConfig('drill', '1.2', '--small', '--time'));
+console.log(logConfig('theory', undefined, '--big', '--infinity'));
+
+function outputArgs() {
+  arguments;
+  return arguments;
+}
+
+// const nutputArgsArrow = () => args;
+
+console.log(outputArgs());
+
+const processData = (val) => (val === undefined ? null : val * 2);
+
+console.log(processData(5));

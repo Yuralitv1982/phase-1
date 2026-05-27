@@ -1,0 +1,21 @@
+# 📦 Зависимости (устанавливаются через npm/yarn/pnpm)
+node_modules/
+
+# 🌍 Переменные окружения (если добавите позже)
+.env
+.env.local
+.env.*.local
+
+# 🖥️ Системные файлы ОС
+.DS_Store
+Thumbs.db
+
+# 💻 Настройки редакторов/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 📦 Если позже появится сборщик (Vite, Webpack и т.п.)
+dist/
+build/

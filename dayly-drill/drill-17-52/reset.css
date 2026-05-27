@@ -1,0 +1,98 @@
+/* =============================================================================
+ M inimal Reset for Drills — быстро, чисто, без лишнего                           *
+ Minimal Reset for Drills — fast, clean, no bloat
+ ============================================================================= */
+
+/* 1. Box-sizing: border-box по умолчанию (интуитивно для вёрстки) */
+/* 1. Box-sizing: border-box by default (intuitive for layout) */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. Базовые стили тела */
+/* 2. Base body styles */
+body {
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 3. Изображения и медиа — не вылезать за контейнер */
+/* 3. Images and media — don't overflow container */
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* 4. Формы — наследовать шрифт и размер */
+/* 4. Forms — inherit font and size */
+input, button, textarea, select {
+    font: inherit;
+    font-size: 1rem;
+    color: inherit;
+}
+
+/* 5. Ссылки — убрать стандартное подчёркивание, добавить курсор */
+/* 5. Links — remove default underline, add cursor */
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* 6. Списки — убрать маркеры по умолчанию */
+/* 6. Lists — remove default markers */
+ul, ol {
+    list-style: none;
+}
+
+/* 7. Таблицы — схлопнуть границы */
+/* 7. Tables — collapse borders */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* 8. Заголовки — сбросить отступы, задать вес */
+/* 8. Headings — reset margins, set weight */
+h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+/* 9. Код — моноширинный шрифт, фон */
+/* 9. Code — monospace font, background */
+code, pre, kbd {
+    font-family: ui-monospace, 'Fira Code', Consolas, monospace;
+    font-size: 0.95em;
+}
+pre {
+    overflow-x: auto;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+/* 10. Утилиты для быстрого прототипирования */
+/* 10. Utilities for quick prototyping */
+.container {
+    width: min(100% - 2rem, 1200px);
+    margin-inline: auto;
+}
+.flex { display: flex; gap: 1rem; }
+.grid { display: grid; gap: 1rem; }
+.hidden { display: none !important; }
+
+/* =============================================================================
+ Г отово. Подключай в <head>: <link rel="stylesheet" href="reset.css">            *
+ Done. Connect in <head>: <link rel="stylesheet" href="reset.css">
+ ============================================================================= */

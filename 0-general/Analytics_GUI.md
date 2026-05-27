@@ -332,7 +332,7 @@ dv.paragraph(html);
 
 // --- НАСТРОЙКИ ---
 const DAILY_FOLDER = "0-dayly"; 
-const WEEK_GOAL = 40; // Цель часов на неделю
+const WEEK_GOAL = 20; // Цель часов на неделю
 
 // 🛑 ЧЕРНЫЙ СПИСОК (Фильтр мусора)
 const IGNORE_FIELDS = [
